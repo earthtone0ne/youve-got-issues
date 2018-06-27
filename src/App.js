@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import GitKeyForm from './components/GitKeyForm';
+import RepoList from './components/RepoList';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       gitKey: null,
+      selectedRepo: null,
     };
   }
   updateValue= (key, value) => {
@@ -24,6 +26,7 @@ class App extends Component {
         </header>
         <article className="flex-col">
           {this.state.gitKey && <RepoList gitKey={this.state.gitKey} updateValue={this.updateValue} /> }
+          {this.state.selectedRepo && this.state.selectedRepo.name}
         </article>
       </div>
     );
