@@ -1,0 +1,36 @@
+.git-key-form {
+  height: 120px;
+  flex: 1;
+  align-items: flex-start;
+  min-width: 270px;
+  max-width: 50ch;
+  flex-wrap: wrap;
+  margin-top: .75vw;
+  font-size: 1.2rem;
+  text-align: left;
+  div.key-input {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  input, button {
+    padding: .7rem 1rem;
+    border-radius: 3rem;
+    border: 1px solid rgba(10,10,10,.1)
+  }
+  label {
+    flex: 1 0 15ch;
+    min-width: 18ch;
+    padding-top: .7rem;
+
+  }
+  input {
+    flex: 1 0 auto;
+    min-width: 250px;
+  }
+  button {
+    align-self: flex-end;
+    margin-top: 1rem;
+    padding: .7rem 3rem;
+    background-color: #F4DAC1;
+  }
+}
