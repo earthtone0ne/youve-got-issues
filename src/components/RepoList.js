@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import './RepoList.css';
 
 class RepoList extends React.Component {
@@ -31,13 +32,13 @@ class RepoList extends React.Component {
         {repos && Array.isArray(repos) ? repos.map( repo => (
           <div
             key={repo.id}
-            className={`flex-row repo-item card`}
+            className='flex-row repo-item card'
             onClick={(e)=>this.selectRepo(e, repo)}
           >
-            <img src={repo.owner.avatar_url} />
+            <img src={repo.owner.avatar_url} alt="Repo owner avatar"/>
             <div className="flex-col">
               <h4>{repo.name}</h4>
-              <p>{new Date(repo.updated_at).toLocaleString()}</p>
+              <p>Last updated: {moment(repo.updated_at).fromNow()}</p>
             </div>
           </div>
         ))

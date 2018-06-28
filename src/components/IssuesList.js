@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import './IssuesList.css';
 
 class IssuesList extends React.Component {
@@ -10,7 +11,7 @@ class IssuesList extends React.Component {
       sortIndex: 0, // TBD
     };
   }
-  componentDidMount() {
+  getIssues = () => {
     fetch(`https://api.github.com/repos/${this.props.repo.full_name}/issues?state=all`, {
       method: 'GET',
       headers: new Headers({
@@ -18,27 +19,47 @@ class IssuesList extends React.Component {
       })
     })
     .then( res => res.json() )
-    .then( issues => this.setState({issues}) )
+    .then( issues => this.setState({issues}, () => console.log({issues})) )
     .catch( err => console.error(err) );
   }
-
+  sortCompleted = () => {
+    const newList = [...this.state.issues];
+    if (this.state.sortBy !== 'completed_at') {
+      newList.sort( (a,b) => (!!b.closed_at ? 0 : 1) - (!!a.closed_at ? 0 : 1));
+    } else {
+      newList.reverse();
+    }
+    this.setState({issues: newList});
+  }
+  componentDidMount() {
+    if (this.props.repo.has_issues) {
+      this.getIssues();
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.repo.id !== prevProps.repo.id) {
+      this.getIssues();
+    }
+  }
   render() {
     return (
       <div className="issues-list flex-col">
-        <h3>Issues in {this.props.repo.name}...</h3>
+        <h3>{this.state.issues.length} Issues in {this.props.repo.name}:</h3>
+        <button className="sort-wip" onClick={this.sortCompleted}>Sort by Completed</button>
         {!!this.state.issues.length && this.state.issues.map(issue => (
           <div key={issue.id} className="issue-item flex-row card">
             <div className="assignee flex-col">
               {issue.assignee
-                ? <img src={issue.assignee.avatar_url} alt={issue.assignee.name + ' avatar'} />
+                ? <img src={issue.assignee.avatar_url} alt={issue.assignee.login + ' avatar'} />
                 : <div className="placeholder"></div>
               }
-            <span>{()=>this.getProperty(issue, 'assignee', 'name')}</span>
+            <span>{issue.assignee ? issue.assignee.login : ''}</span>
             </div>
             <div className="issue-details flex-col">
-              <h4>{issue.title}</h4>
-              <span>{issue.created_at}</span>
-              <span>{issue.updated_at}</span>
+              <h4 className={issue.closed_at ? 'completed' : ''}>{issue.title}</h4>
+              <span>Created: {moment(issue.created_at).format('MM/DD/YYYY')}</span>
+              <span>Last updated: {moment(issue.updated_at).fromNow()}</span>
+              {!!issue.closed_at && <span>Completed: {moment(issue.closed_at).fromNow()}</span>}
             </div>
           </div>
         )) }

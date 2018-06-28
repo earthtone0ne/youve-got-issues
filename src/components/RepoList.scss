@@ -1,5 +1,10 @@
 .repo-list {
-  // height: 100%;
+  flex: 0 1 auto;
+  min-width: 300px;
+  h3 {
+    margin-bottom: 1.75ex;
+    margin-top: 1.75ex;
+  }
   img {
     border-radius: 50%;
     width: 3rem;
@@ -7,9 +12,10 @@
     margin: 1rem 1.5rem;
   }
   .repo-item {
-    width: 45vw;
+    // width: 42vw;
     align-items: center;
     justify-content: flex-start;
+    margin: 0.5rem 2rem;
     // &.selected {
     //   text-shadow: 1px 2px 3px slateblue;
     // }
