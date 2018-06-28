@@ -1,12 +1,18 @@
-.App-header {
-  background-color: #728092;
-  height: 120px;
-  padding: 20px;
-  color: white;
-  .App-branding {
-    text-align: left;
-    font-family: 'Monaco', sans-serif;
-    min-width: 300px;
-    padding-right: 2rem;
+.App {
+  .App-header {
+    background-color: #728092;
+    height: 120px;
+    padding: 20px;
+    color: white;
+    .App-branding {
+      text-align: left;
+      font-family: 'Monaco', sans-serif;
+      min-width: 300px;
+      padding-right: 2rem;
+    }
+  }
+  & > article {
+    width: 100vw;
+    overflow-x: hidden;
   }
 }

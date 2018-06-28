@@ -1,0 +1,23 @@
+.issues-list {
+  flex: 1 1 auto;
+  .card {
+    padding: 1rem;
+    width: 50vw;
+  }
+  .assignee > img ,
+  .assignee > div {
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 100%;
+    margin: 1.5rem;
+  }
+  .issue-details {
+    h4, span {
+      margin: .5em 0;
+    }
+    span {
+      margin: .5rem 0;
+    }
+  }
+}

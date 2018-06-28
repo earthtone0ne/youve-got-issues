@@ -1,4 +1,5 @@
 .repo-list {
+  // height: 100%;
   img {
     border-radius: 50%;
     width: 3rem;
@@ -9,8 +10,8 @@
     width: 45vw;
     align-items: center;
     justify-content: flex-start;
-    p {
-      
-    }
+    // &.selected {
+    //   text-shadow: 1px 2px 3px slateblue;
+    // }
   }
 }

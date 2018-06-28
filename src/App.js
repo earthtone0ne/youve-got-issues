@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import GitKeyForm from './components/GitKeyForm';
+import IssuesList from './components/IssuesList';
 import RepoList from './components/RepoList';
 
 class App extends Component {
@@ -24,9 +25,13 @@ class App extends Component {
           </div>
           <GitKeyForm updateValue={this.updateValue}/>
         </header>
-        <article className="flex-col">
-          {this.state.gitKey && <RepoList gitKey={this.state.gitKey} updateValue={this.updateValue} /> }
-          {this.state.selectedRepo && this.state.selectedRepo.name}
+        <article className="flex-row">
+          {this.state.gitKey &&
+            <RepoList gitKey={this.state.gitKey} updateValue={this.updateValue} />
+          }
+          {this.state.selectedRepo &&
+            <IssuesList gitKey={this.state.gitKey} repo={this.state.selectedRepo}/>
+          }
         </article>
       </div>
     );

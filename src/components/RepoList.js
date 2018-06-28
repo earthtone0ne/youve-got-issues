@@ -6,7 +6,6 @@ class RepoList extends React.Component {
     super(props);
     this.state = {
       repos: null,
-      selectedRepo: null,
     };
   }
   componentDidMount() {
@@ -28,10 +27,11 @@ class RepoList extends React.Component {
     const repos = this.state.repos;
     return (
       <div className="repo-list">
-        {repos && Array.isArray(repos) && repos.map( repo => (
+        <h3>Your repositories...</h3>
+        {repos && Array.isArray(repos) ? repos.map( repo => (
           <div
             key={repo.id}
-            className="flex-row repo-item card"
+            className={`flex-row repo-item card`}
             onClick={(e)=>this.selectRepo(e, repo)}
           >
             <img src={repo.owner.avatar_url} />
@@ -40,7 +40,10 @@ class RepoList extends React.Component {
               <p>{new Date(repo.updated_at).toLocaleString()}</p>
             </div>
           </div>
-        ))}
+        ))
+      : <h5>Loading...</h5>
+
+      }
       </div>
     );
   }
